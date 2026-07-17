@@ -1,9 +1,4 @@
-"""
-Cleans the raw product catalog produced by scraper.py:
- - drops rows where Product_Name is actually just a price
- - drops rows that are generic UI/navigation text, not real products
- - writes the result to a NEW file (never overwrites the raw catalog)
-"""
+""" Cleans the raw product catalog produced by scraper.py """
 import sys
 import pandas as pd
 
