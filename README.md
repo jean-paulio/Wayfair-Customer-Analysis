@@ -21,7 +21,9 @@ This structure allows us to build, test, and run a complete analytical pipeline 
 
 ## ⚙️ Process
 ### 1. Data Ingestion
-Our first step is to retrieve the catalog data from Wayfair. 
+Our first step is to retrieve the catalog data from Wayfair.
+
+
 ### 2. Quality Control & Transformation
 ### 3. Operational Database Simulation
 ### 4. Cohort Analytics
