@@ -21,8 +21,27 @@ This structure allows us to build, test, and run a complete analytical pipeline 
 
 ## ⚙️ Process
 ### 1. Data Ingestion
-Our first step is to retrieve the catalog data from Wayfair.
+Our first step is to retrieve the catalog data from Wayfair. We're using a specific category of products from Wayfair - that being area rugs. The data will come from the HTML webpage *"https://www.wayfair.com/rugs/sb0/area-rugs-c215386.html?keyword=rugs"*. 
 
+Now we create our first file **scraper.py** to act as an HTML parsing engine using BeautifulSoup to extract the live catalog items, real product names, and current prices directly from the e-commerce interface. The file produces a **product_catalog.csv** file containing the product names and authentic prices directly from the live web.
+
+<details>
+<summary> product_catalog.csv (preview) </summary>
+
+| Product_ID | Product_Name | Price | Source |
+| :--- | :--- | :--- | :--- |
+| PROD_163bd914 | Disney Mickey Mouse Tropical Sand Dollar Havana Brown/ Sand Flatweave Indoor/ | $ 208.84 | scraped |
+| PROD_ef361fba | Radiant Oriental Multicolor Hand Knotted Wool Blue, Pink, Navy Traditional Area | $3,399.99 | scraped |
+| PROD_f03852cf | Lahjar Speckled Wool Blend Area Rug | $ 519.99 | scraped |
+| PROD_a39a8d2b | Rinoa Indoor / Outdoor Rug | $ 202.99 | scraped |
+| PROD_fd0cd8cf | Non-Slip Washable Stain Resistant Area Rug For Living Room Bedroom Dining Room | $ 97.99 | scraped |
+| PROD_15009179 | Maust Sunshine Rainbow Shag Rug | $ 109.99 | scraped |
+| PROD_96a0055d | Loloi Botanical Ivory / Multi Area Rug | $ 32.99 | scraped |
+| PROD_03533587 | Hand Hooked Wool Oriental Indoor Rug | $ 49.99 | scraped |
+| PROD_9d77c7b9 | Rifle Paper Co. x Loloi Rosa Sky Area Rug | $ 110.66 | scraped |
+| PROD_28b95f59 | Mendota Geometric Tan Indoor/Outdoor Area Rug | $ 139.99 | scraped |
+
+</details>
 
 ### 2. Quality Control & Transformation
 ### 3. Operational Database Simulation
