@@ -25,8 +25,12 @@ Our first step is to retrieve the catalog data from Wayfair. We're using a speci
 
 Now we create our first file **scraper.py** to act as an HTML parsing engine using BeautifulSoup to extract the live catalog items, real product names, and current prices directly from the e-commerce interface. The file produces a **product_catalog.csv** file containing the product names and authentic prices directly from the live web.
 
+<br>[scraper.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/scraper.py)
+
+<br>The full output from the product_catalog.csv file produces 49 rows of unique products. The following preview shows the first 10:
+
 <details>
-<summary> product_catalog.csv (preview) </summary>
+<summary> Preview - product_catalog.csv </summary>
 
 | Product_ID | Product_Name | Price | Source |
 | :--- | :--- | :--- | :--- |
@@ -43,6 +47,38 @@ Now we create our first file **scraper.py** to act as an HTML parsing engine usi
 
 </details>
 
-### 2. Quality Control & Transformation
+### 2. Data Cleaning & Quality Control
+
+Our next file **clean_data.py** is part of our validation step which uses Pandas to identify and strip out web-scraping anomalies, layout clutter, and duplicate price captures. This stage ensures a clean database schema and enforces data integrity before injecting the catalog into downstream systems. 
+
+<br>[clean_data.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/clean_data.py)
+
+<br>In this instance, our run of scraper.py produced output clean enough that clean_data.py made no alrerations. Of course, we still keep this file as part of our pipeline to guarantee that regardless of what the craper pulls from any other potential runs, only validated and proper schema-compliant data reaches our database.
+
 ### 3. Operational Database Simulation
+
+After verifying our product catalog is clean, we run our last file **simulator.py**. This file acts as an engine to generate our **raw_sales_data.csv** file -- a historical ledger of 2500 simulated sales transactions using a real scraped product catalog and simulated customers. It employs weighted random distributions to model realistic consumer patterns (such as order frequencies, varying basket sizes, and transaction dates over a 365-day timeline).
+
+<br>[simulator.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/simulator.py)
+
+<br> The full output from the raw_sales_data.csv file produces 2500 rows of unique transactions. The following preview shows the first 10:
+
+<details>
+<summary> Preview - raw_sales_data.csv </summary>
+
+| InvoiceNo | CustomerID | CustomerName | ProductID | ProductName | UnitPrice | Quantity | InvoiceDate
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| INV_668950 | CUST_1206 | Stacey Arias | PROD_7cb7c01e | Achilles Cream/Gray Rug | $ 121.88 | 2 | 6/1/2025 |
+| INV_945687 | CUST_1362 | Melissa Brewer | PROD_81ed29d6 | Soft Washable Vintage Distressed Beige Area Rug with Non-Slip Backing | $ 136.26 | 1 | 6/1/2025 |
+| INV_320392 | CUST_1207 | Zachary Brooks | PROD_16a4bedb | Aitken Machine Woven Geometric Indoor and Outdoor Rug | $ 69.60 | 2 | 6/1/2025 |
+| INV_969659 | CUST_1231 | Michele Lewis | PROD_f03852cf | Lahjar Speckled Wool Blend Area Rug | $ 536.25 | 1 | 6/1/2025 |
+| INV_352249 | CUST_1149 | David Medina | PROD_81ed29d6 | Soft Washable Vintage Distressed Beige Area Rug with Non-Slip Backing | $ 137.55 | 5 | 6/1/2025 |
+| INV_960622 | CUST_1495 | Curtis Watson | PROD_a39a8d2b | Rinoa Indoor / Outdoor Rug | $ 207.12 | 1 | 6/1/2025 |
+| INV_911329 | CUST_1086 | Madison Poole | PROD_1ad08862 | Scalloped Washable Rug Area Rugs for Living Room Modern Rugs Abstract Non-Slip | $ 72.93 | 1 | 6/1/2025 |
+| INV_612340 | CUST_1472 | Samuel Suarez | PROD_7ef65a00 | Jules Checkered Area Rug | $ 136.33 | 1 | 6/1/2025 |
+| INV_548580 | CUST_1225 | Heather Bolton | PROD_20bbb110 | Ainswick Memory Foam Large Rug | $ 598.02 | 1 | 6/1/2025 |
+| INV_696474 | CUST_1135 | Brooke Alexander | PROD_885c587d | Paseo Gurseerit All-Weather Flatweave Indoor/Outdoor Area Rug, Brown Black | $ 94.18 | 2 | 6/1/2025 |
+
+</details>
+
 ### 4. Cohort Analytics
