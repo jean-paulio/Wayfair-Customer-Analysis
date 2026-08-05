@@ -23,11 +23,11 @@ This structure allows us to build, test, and run a complete analytical pipeline 
 ### 1. Data Ingestion
 Our first step is to retrieve the catalog data from Wayfair. We're using a specific category of products from Wayfair - that being area rugs. The data will come from the HTML webpage *"https://www.wayfair.com/rugs/sb0/area-rugs-c215386.html?keyword=rugs"*. 
 
-Now we create our first file **scraper.py** to act as an HTML parsing engine using BeautifulSoup to extract the live catalog items, real product names, and current prices directly from the e-commerce interface. The file produces a **product_catalog.csv** file containing the product names and authentic prices directly from the live web.
+Our first file **scraper.py** acts as an HTML parsing engine using BeautifulSoup to extract the live catalog items, real product names, and current prices directly from the e-commerce interface. Our output is a **product_catalog.csv** file containing the product names and authentic prices directly from the live web.
 
 <br>[scraper.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/scraper.py)
 
-<br>The full output from the product_catalog.csv file produces 49 rows of unique products. The following preview shows the first 10:
+<br>The full output from the product_catalog.csv file produces 49 rows of unique products. The following preview displays the first 10:
 
 <details>
 <summary> Preview - product_catalog.csv </summary>
@@ -47,21 +47,21 @@ Now we create our first file **scraper.py** to act as an HTML parsing engine usi
 
 </details>
 
-### 2. Data Cleaning & Quality Control
+<br> ### 2. Data Cleaning & Quality Control
 
-Our next file **clean_data.py** is part of our validation step which uses Pandas to identify and strip out web-scraping anomalies, layout clutter, and duplicate price captures. This stage ensures a clean database schema and enforces data integrity before injecting the catalog into downstream systems. 
+Our next file **clean_data.py** uses Pandas to identify and strip out web-scraping anomalies, layout clutter, and duplicate price captures. This stage ensures a clean database schema and enforces data integrity before injecting the catalog into downstream systems. 
 
 <br>[clean_data.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/clean_data.py)
 
-<br>In this instance, our run of scraper.py produced output clean enough that clean_data.py made no alrerations. Of course, we still keep this file as part of our pipeline to guarantee that regardless of what the craper pulls from any other potential runs, only validated and proper schema-compliant data reaches our database.
+<br>In this instance, our run of scraper.py produced output clean enough that clean_data.py made no alterations. Of course, we still keep this file as part of our pipeline to guarantee only validated and proper schema-compliant data reaches our database, regardless of what the scraper pulls through.
 
-### 3. Operational Database Simulation
+<br> ### 3. Operational Database Simulation
 
-After verifying our product catalog is clean, we run our last file **simulator.py**. This file acts as an engine to generate our **raw_sales_data.csv** file -- a historical ledger of 2500 simulated sales transactions using a real scraped product catalog and simulated customers. It employs weighted random distributions to model realistic consumer patterns (such as order frequencies, varying basket sizes, and transaction dates over a 365-day timeline).
+After verifying our product catalog is clean, we run our last file **simulator.py**, which generates our **raw_sales_data.csv** file -- a historical ledger of 2500 simulated sales transactions using a real scraped product catalog and simulated customers. It employs weighted random distributions to model realistic consumer patterns (such as order frequencies, varying basket sizes, and transaction dates over a 365-day timeline).
 
 <br>[simulator.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/simulator.py)
 
-<br> The full output from the raw_sales_data.csv file produces 2500 rows of unique transactions. The following preview shows the first 10:
+<br> The full output from the raw_sales_data.csv file produces 2500 rows of unique transactions. The following preview displays the first 10:
 
 <details>
 <summary> Preview - raw_sales_data.csv </summary>
@@ -81,4 +81,7 @@ After verifying our product catalog is clean, we run our last file **simulator.p
 
 </details>
 
-### 4. Cohort Analytics
+<br> ### 4. Cohort Analytics
+
+
+Our last code file **rfm_analysis_pandas.py** contains an analytical script that aggregates the transaction history, calculates raw RFM metrics per customer, applies quantile-based scoring, and outputs a clean segmentation matrix.
