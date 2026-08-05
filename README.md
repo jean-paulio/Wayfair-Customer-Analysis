@@ -69,4 +69,4 @@ After verifying our product catalog is clean, we run our last file [simulator.py
 
 ### 4. Cohort Analytics
 
-Our last code file [rfm_analysis_pandas.py] contains an analytical script that aggregates the transaction history, calculates raw RFM metrics per customer, applies quantile-based scoring, and outputs a clean segmentation matrix.
+Our last code file [rfm_analysis.py](https://github.com/jean-paulio/Wayfair-Customer-Analysis/blob/main/rfm_analysis.py) contains an analytical script that aggregates the transaction history, calculates raw RFM metrics per customer, applies quantile-based scoring, and outputs a clean segmentation matrix.
